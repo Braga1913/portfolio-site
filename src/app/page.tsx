@@ -10,7 +10,7 @@ const basePath = process.env.NODE_ENV === 'production' ? '/portfolio-site' : '';
 const professionalSummary = {
   name: "Parth Sarthi",
   title: "Animation Programmer & Technical Animator",
-  location: "Muzzafarpur, Bihar, India", // Replace with your actual location
+  location: "Muzaffarpur, Bihar, India", // Replace with your actual location
   summary: "Passionate animation programmer and technical animator with expertise in creating cutting-edge animation systems, procedural animation tools, and performative animation pipelines. Specialized in bridging the gap between artistic vision and technical implementation.",
   skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Photoshop ", "Python ", "C# ", "C++ ", "VFX ", "Rigging ", "Houdini ", "Substance Painter ", " FL Studio", " MotionBuilder", " Game Audio"]
 };
