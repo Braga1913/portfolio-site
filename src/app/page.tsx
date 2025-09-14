@@ -149,7 +149,7 @@ const animationShowcase = [
     alt: "Lighter Animation (Baoli)"
   },
   {
-    title: "Sit on Couch (Baoli)",
+    title: "Sit (Baoli)",
     gifUrl: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3IyNDFqYm83MnR5OTJra2k4Mjlubm9qdTR0NHF0NHVvajkxaHdkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SH9uV4tjhmSYcVrFxv/giphy.gif",
     alt: "Sit on Couch (Baoli)"
   }
