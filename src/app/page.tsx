@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+// Get the base path for images
+const basePath = process.env.NODE_ENV === 'production' ? '/portfolio-site' : '';
+
 // Sample data - you can replace these with your actual content
 const professionalSummary = {
   name: "Parth Sarthi",
@@ -193,7 +196,7 @@ export default function Home() {
                 <div className="absolute inset-2 rounded-full shadow-inner bg-gradient-to-br from-gray-100 to-white"></div>
                 <div className="relative w-full h-full bg-slate-400 rounded-full overflow-hidden shadow-lg ring-2 ring-white/50">
                   <Image
-                    src="/images/profile.png"
+                    src={`${basePath}/images/profile.png`}
                     alt="Parth Sarthi - Profile Photo"
                     width={160}
                     height={160}
