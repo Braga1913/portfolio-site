@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 
 // Sample data - you can replace these with your actual content
 const professionalSummary = {
@@ -558,7 +557,7 @@ export default function Home() {
             <p className={`text-lg mb-8 leading-relaxed transition-colors duration-500 ${
               isDarkMode ? 'text-slate-300' : 'text-slate-500'
             }`}>
-              I'm always interested in discussing new opportunities, collaborations, or just talking about animation and technology. Feel free to reach out!
+              I&apos;m always interested in discussing new opportunities, collaborations, or just talking about animation and technology. Feel free to reach out!
             </p>
 
             {/* Contact Methods */}
