@@ -19,7 +19,7 @@ const experiences = [
   {
     company: "Rifflix",
     position: "Animation Programmer & Plugin Developer",
-    duration: "2025 - Present",
+    duration: "2025 - 2026",
     description: "Developed animation tools and pipelines that were used to make an automated episode generation system using AI in Unreal Engine"
   },
   {
