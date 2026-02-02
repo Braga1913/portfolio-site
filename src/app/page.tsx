@@ -31,7 +31,7 @@ const experiences = [
   {
     company: "India Game Lab",
     position: "Specialist Instructor",
-    duration: "2024 - 2025",
+    duration: "2024 - Present",
     description: "Instructed character rigging and animation in Blender, Cascadeur & Unreal Engine, animation production with technical solutions."
   }
 ];
