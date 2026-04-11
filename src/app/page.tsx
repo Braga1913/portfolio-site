@@ -12,7 +12,7 @@ const professionalSummary = {
   title: "Animation Programmer & Technical Animator",
   location: "Muzaffarpur, Bihar, India", // Replace with your actual location
   summary: "Passionate animation programmer and technical animator with expertise in creating cutting-edge animation systems, procedural animation tools, and performative animation pipelines. Specialized in bridging the gap between artistic vision and technical implementation.",
-  skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Photoshop ", "Python ", "C# ", "C++ ", "VFX ", "Rigging ", "Houdini ", "Substance Painter ", " FL Studio", " MotionBuilder", " Game Audio"]
+  skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Python ", "C# ", "C++ ", "Houdini ", " MotionBuilder"]
 };
 
 const experiences = [
@@ -99,27 +99,27 @@ const selectedProjects = [
   }
 ];
 
-// Sample recognition & awards data - replace with your actual awards
-const recognitionAwards = [
-  {
-    title: "Baoli Featured at India Game Utsav 2025",
-    organization: "ShaderLabs",
-    year: "2025",
-    description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
-  },
-  {
-    title: "Best Instructor of the Year",
-    organization: "India Game Lab",
-    year: "2024",
-    description: "Awarded for having the Most Impact on Students."
-  },
-  {
-    title: "Innovation in Animation Technology with AI",
-    organization: "Rifflix",
-    year: "2025",
-    description: "Honored for developing cutting-edge tools and workflows for animation production with AI."
-  }
-];
+// // Sample recognition & awards data - replace with your actual awards
+// const recognitionAwards = [
+//   {
+//     title: "Baoli Featured at India Game Utsav 2025",
+//     organization: "ShaderLabs",
+//     year: "2025",
+//     description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
+//   },
+//   {
+//     title: "Best Instructor of the Year",
+//     organization: "India Game Lab",
+//     year: "2024",
+//     description: "Awarded for having the Most Impact on Students."
+//   },
+//   {
+//     title: "Innovation in Animation Technology with AI",
+//     organization: "Rifflix",
+//     year: "2025",
+//     description: "Honored for developing cutting-edge tools and workflows for animation production with AI."
+//   }
+// ];
 
 // Sample animation data - replace with your actual GIFs
 const animationShowcase = [
@@ -297,7 +297,7 @@ export default function Home() {
             <h3 className={`text-xl font-semibold mb-4 transition-colors duration-500 ${
               isDarkMode ? 'text-slate-200' : 'text-slate-600'
             }`}>
-              Core Skills
+              Key Skills & Expertise
             </h3>
             <div className="flex flex-wrap gap-3">
               {professionalSummary.skills.map((skill, index) => (
