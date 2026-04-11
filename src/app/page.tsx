@@ -99,27 +99,27 @@ const selectedProjects = [
   }
 ];
 
-// // Sample recognition & awards data - replace with your actual awards
-// const recognitionAwards = [
-//   {
-//     title: "Baoli Featured at India Game Utsav 2025",
-//     organization: "ShaderLabs",
-//     year: "2025",
-//     description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
-//   },
-//   {
-//     title: "Best Instructor of the Year",
-//     organization: "India Game Lab",
-//     year: "2024",
-//     description: "Awarded for having the Most Impact on Students."
-//   },
-//   {
-//     title: "Innovation in Animation Technology with AI",
-//     organization: "Rifflix",
-//     year: "2025",
-//     description: "Honored for developing cutting-edge tools and workflows for animation production with AI."
-//   }
-// ];
+// Sample recognition & awards data - replace with your actual awards
+const recognitionAwards = [
+  {
+    title: "Baoli Featured at India Game Utsav 2025",
+    organization: "ShaderLabs",
+    year: "2025",
+    description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
+  },
+  {
+    title: "Best Instructor of the Year",
+    organization: "India Game Lab",
+    year: "2024",
+    description: "Awarded for having the Most Impact on Students."
+  },
+  {
+    title: "Innovation in Animation Technology with AI",
+    organization: "Rifflix",
+    year: "2025",
+    description: "Honored for developing cutting-edge tools and workflows for animation production with AI."
+  }
+];
 
 // Sample animation data - replace with your actual GIFs
 const animationShowcase = [
