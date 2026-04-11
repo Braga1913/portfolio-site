@@ -12,7 +12,7 @@ const professionalSummary = {
   title: "Animation Programmer & Technical Animator",
   location: "Muzaffarpur, Bihar, India", // Replace with your actual location
   summary: "Passionate animation programmer and technical animator with expertise in creating cutting-edge animation systems, procedural animation tools, and performative animation pipelines. Specialized in bridging the gap between artistic vision and technical implementation.",
-  skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Python ", "C# ", "C++ ", "Houdini ", " MotionBuilder"]
+  skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Python ", "C# ", "C++ ", "Houdini "]
 };
 
 const experiences = [
@@ -165,8 +165,8 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen transition-colors duration-500 ${isDarkMode
-        ? 'bg-gradient-to-br from-slate-800 to-slate-900'
-        : 'bg-gradient-to-br from-gray-100 to-orange-100'
+      ? 'bg-gradient-to-br from-slate-800 to-slate-900'
+      : 'bg-gradient-to-br from-gray-100 to-orange-100'
       }`}>
 
 
@@ -221,8 +221,8 @@ export default function Home() {
           <a
             href="https://www.linkedin.com/in/parth-sarthi-9a1143289"
             className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-                ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-                : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
+              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
+              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
               }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -235,8 +235,8 @@ export default function Home() {
           <a
             href="mailto:parthsarthi1208@gmail.com"
             className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-                ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-                : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
+              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
+              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
               }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -249,8 +249,8 @@ export default function Home() {
           <a
             href="tel:+917506087041"
             className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-                ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-                : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
+              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
+              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
               }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -283,8 +283,8 @@ export default function Home() {
                 <span
                   key={index}
                   className={`px-4 py-2 border-2 rounded-full text-sm font-semibold transition-all duration-300 ${isDarkMode
-                      ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-                      : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
+                    ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
+                    : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
                     }`}
                 >
                   {skill}
@@ -623,8 +623,8 @@ export default function Home() {
       <button
         onClick={toggleDarkMode}
         className={`fixed top-6 right-6 w-14 h-14 rounded-full shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl z-50 ${isDarkMode
-            ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300'
-            : 'bg-slate-600 text-white hover:bg-slate-500'
+          ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300'
+          : 'bg-slate-600 text-white hover:bg-slate-500'
           }`}
         style={{
           transition: 'background-color 0.3s ease'
