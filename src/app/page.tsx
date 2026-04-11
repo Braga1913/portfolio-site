@@ -106,18 +106,6 @@ const recognitionAwards = [
     organization: "ShaderLabs",
     year: "2025",
     description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
-  },
-  {
-    title: "Best Instructor of the Year",
-    organization: "India Game Lab",
-    year: "2024",
-    description: "Awarded for having the Most Impact on Students."
-  },
-  {
-    title: "Innovation in Animation Technology with AI",
-    organization: "Rifflix",
-    year: "2025",
-    description: "Honored for developing cutting-edge tools and workflows for animation production with AI."
   }
 ];
 
@@ -176,17 +164,15 @@ export default function Home() {
 
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${
-      isDarkMode
+    <div className={`min-h-screen transition-colors duration-500 ${isDarkMode
         ? 'bg-gradient-to-br from-slate-800 to-slate-900'
         : 'bg-gradient-to-br from-gray-100 to-orange-100'
-    }`}>
+      }`}>
 
 
       {/* Header */}
-      <header className={`shadow-lg transition-colors duration-500 ${
-        isDarkMode ? 'bg-slate-800' : 'bg-slate-600'
-      }`}>
+      <header className={`shadow-lg transition-colors duration-500 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-600'
+        }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-center space-x-8">
             {/* Profile Picture */}
@@ -234,14 +220,13 @@ export default function Home() {
           {/* LinkedIn Button */}
           <a
             href="https://www.linkedin.com/in/parth-sarthi-9a1143289"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${
-              isDarkMode
+            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
                 ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
                 : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-            }`}
+              }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
             </svg>
             LinkedIn
           </a>
@@ -249,14 +234,13 @@ export default function Home() {
           {/* Email Button */}
           <a
             href="mailto:parthsarthi1208@gmail.com"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${
-              isDarkMode
+            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
                 ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
                 : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-            }`}
+              }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h3.819v.273L12 8.773l6.545-4.679V3.82h3.819c.904 0 1.636.733 1.636 1.637z"/>
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h3.819v.273L12 8.773l6.545-4.679V3.82h3.819c.904 0 1.636.733 1.636 1.637z" />
             </svg>
             Email
           </a>
@@ -264,14 +248,13 @@ export default function Home() {
           {/* Phone Button */}
           <a
             href="tel:+917506087041"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${
-              isDarkMode
+            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
                 ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
                 : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-            }`}
+              }`}
           >
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
             </svg>
             Phone
           </a>
@@ -280,34 +263,29 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-16">
         {/* Professional Summary */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
           }`}>
+          <h2 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Professional Summary
           </h2>
-          <p className={`text-lg mb-6 leading-relaxed transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-300' : 'text-slate-500'
-          }`}>
+          <p className={`text-lg mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+            }`}>
             {professionalSummary.summary}
           </p>
           <div>
-            <h3 className={`text-xl font-semibold mb-4 transition-colors duration-500 ${
-              isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
+            <h3 className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+              }`}>
               Key Skills & Expertise
             </h3>
             <div className="flex flex-wrap gap-3">
               {professionalSummary.skills.map((skill, index) => (
                 <span
                   key={index}
-                  className={`px-4 py-2 border-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    isDarkMode
+                  className={`px-4 py-2 border-2 rounded-full text-sm font-semibold transition-all duration-300 ${isDarkMode
                       ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
                       : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-                  }`}
+                    }`}
                 >
                   {skill}
                 </span>
@@ -317,37 +295,31 @@ export default function Home() {
         </section>
 
         {/* Experience Board */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
           }`}>
+          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Experience
           </h2>
           <div className="space-y-8">
             {experiences.map((exp, index) => (
               <div key={index} className="border-l-4 border-orange-400 pl-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
+                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                    }`}>
                     {exp.position}
                   </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
+                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                    }`}>
                     {exp.duration}
                   </span>
                 </div>
-                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                }`}>
+                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                  }`}>
                   {exp.company}
                 </h4>
-                <p className={`leading-relaxed transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                }`}>
+                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
+                  }`}>
                   {exp.description}
                 </p>
               </div>
@@ -356,42 +328,35 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
           }`}>
+          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Education
           </h2>
           <div className="space-y-8">
             {education.map((edu, index) => (
               <div key={index} className="border-l-4 border-green-500 pl-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
+                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                    }`}>
                     {edu.degree}
                   </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
+                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                    }`}>
                     {edu.duration}
                   </span>
                 </div>
-                <h4 className={`text-lg font-medium mb-1 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                }`}>
+                <h4 className={`text-lg font-medium mb-1 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                  }`}>
                   {edu.institution}
                 </h4>
-                <h5 className={`text-md font-medium mb-3 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                }`}>
+                <h5 className={`text-md font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
+                  }`}>
                   {edu.field}
                 </h5>
-                <p className={`leading-relaxed transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                }`}>
+                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
+                  }`}>
                   {edu.description}
                 </p>
               </div>
@@ -400,37 +365,31 @@ export default function Home() {
         </section>
 
         {/* Recognition & Awards */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
           }`}>
+          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Recognition & Awards
           </h2>
           <div className="space-y-6">
             {recognitionAwards.map((award, index) => (
               <div key={index} className="border-l-4 border-blue-400 pl-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
+                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                    }`}>
                     {award.title}
                   </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
+                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                    }`}>
                     {award.year}
                   </span>
                 </div>
-                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                }`}>
+                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+                  }`}>
                   {award.organization}
                 </h4>
-                <p className={`leading-relaxed transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                }`}>
+                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
+                  }`}>
                   {award.description}
                 </p>
               </div>
@@ -439,12 +398,10 @@ export default function Home() {
         </section>
 
         {/* Selected Projects */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
           }`}>
+          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Selected Projects
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -509,23 +466,19 @@ export default function Home() {
         </section>
 
         {/* Animation Showcase Grid */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
-        }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
           }`}>
+          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Animation Showcase
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {animationShowcase.map((animation, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className={`rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 ${
-                  isDarkMode ? 'bg-slate-700/50' : 'bg-gray-100/50'
-                }`}>
-                  <div className={`aspect-video relative overflow-hidden transition-colors duration-500 ${
-                    isDarkMode ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-gray-100 to-orange-100'
+                <div className={`rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 ${isDarkMode ? 'bg-slate-700/50' : 'bg-gray-100/50'
                   }`}>
+                  <div className={`aspect-video relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-gray-100 to-orange-100'
+                    }`}>
                     <Image
                       src={animation.gifUrl}
                       alt={animation.alt}
@@ -535,9 +488,8 @@ export default function Home() {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className={`text-lg font-medium text-center transition-colors duration-500 ${
-                      isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                    }`}>
+                    <h3 className={`text-lg font-medium text-center transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                      }`}>
                       {animation.title}
                     </h3>
                   </div>
@@ -548,18 +500,15 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${
-          isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-        }`}>
-          <h2 className={`text-3xl font-bold text-center mb-8 transition-colors duration-500 ${
-            isDarkMode ? 'text-slate-200' : 'text-slate-600'
+        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
           }`}>
+          <h2 className={`text-3xl font-bold text-center mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+            }`}>
             Get In Touch
           </h2>
           <div className="max-w-2xl mx-auto text-center">
-            <p className={`text-lg mb-8 leading-relaxed transition-colors duration-500 ${
-              isDarkMode ? 'text-slate-300' : 'text-slate-500'
-            }`}>
+            <p className={`text-lg mb-8 leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
+              }`}>
               I&apos;m always interested in discussing new opportunities, collaborations, or just talking about animation and technology. Feel free to reach out!
             </p>
 
@@ -568,26 +517,22 @@ export default function Home() {
               {/* Email */}
               <div className="text-center">
                 <a href="mailto:parthsarthi1208@gmail.com" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
-                    isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                  }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${
-                      isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                    }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
+                    }`}>
+                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
                 </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                }`}>
+                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                  }`}>
                   Email
                 </h3>
                 <a
                   href="mailto:parthsarthi1208@gmail.com"
-                  className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                  }`}
+                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
+                    }`}
                 >
                   parthsarthi1208@gmail.com
                 </a>
@@ -596,26 +541,22 @@ export default function Home() {
               {/* Phone */}
               <div className="text-center">
                 <a href="tel:+917506087041" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
-                    isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                  }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${
-                      isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                    }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
+                    }`}>
+                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
                 </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                }`}>
+                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                  }`}>
                   Phone
                 </h3>
                 <a
                   href="tel:+917506087041"
-                  className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                  }`}
+                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
+                    }`}
                 >
                   +91 7506087041
                 </a>
@@ -624,26 +565,22 @@ export default function Home() {
               {/* LinkedIn */}
               <div className="text-center">
                 <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
-                    isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                  }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${
-                      isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                    }`} fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
+                    }`}>
+                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                      }`} fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                   </div>
                 </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${
-                  isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                }`}>
+                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
+                  }`}>
                   LinkedIn
                 </h3>
                 <a
                   href="https://www.linkedin.com/in/parth-sarthi-9a1143289"
-                  className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                  }`}
+                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
+                    }`}
                 >
                   Connect with me
                 </a>
@@ -654,31 +591,27 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className={`border-t mt-16 transition-colors duration-500 ${
-        isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-slate-600 border-slate-500'
-      }`}>
+      <footer className={`border-t mt-16 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-slate-600 border-slate-500'
+        }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p className={`transition-colors duration-500 ${
-              isDarkMode ? 'text-slate-200' : 'text-slate-100'
-            }`}>
+            <p className={`transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-100'
+              }`}>
               © 2024 {professionalSummary.name}. All rights reserved.
             </p>
             <div className="mt-4 flex justify-center space-x-6">
-              <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className={`transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
-              }`}>
+              <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
+                }`}>
                 <span className="sr-only">LinkedIn</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                 </svg>
               </a>
-              <a href="https://github.com/Braga1913" className={`transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
-              }`}>
+              <a href="https://github.com/Braga1913" className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
+                }`}>
                 <span className="sr-only">GitHub</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
               </a>
             </div>
@@ -689,11 +622,10 @@ export default function Home() {
       {/* Dark Mode Toggle Button */}
       <button
         onClick={toggleDarkMode}
-        className={`fixed top-6 right-6 w-14 h-14 rounded-full shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl z-50 ${
-          isDarkMode
+        className={`fixed top-6 right-6 w-14 h-14 rounded-full shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl z-50 ${isDarkMode
             ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300'
             : 'bg-slate-600 text-white hover:bg-slate-500'
-        }`}
+          }`}
         style={{
           transition: 'background-color 0.3s ease'
         }}
@@ -703,12 +635,12 @@ export default function Home() {
           {isDarkMode ? (
             // Sun icon for light mode
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
             </svg>
           ) : (
             // Moon icon for dark mode
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd"/>
+              <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd" />
             </svg>
           )}
         </div>
