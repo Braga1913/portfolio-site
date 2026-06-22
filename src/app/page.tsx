@@ -1,650 +1,630 @@
 'use client';
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
-// Get the base path for images
 const basePath = process.env.NODE_ENV === 'production' ? '/portfolio-site' : '';
 
-// Sample data - you can replace these with your actual content
-const professionalSummary = {
-  name: "Parth Sarthi",
-  title: "Animation Programmer & Technical Animator",
-  location: "Muzaffarpur, Bihar, India", // Replace with your actual location
-  summary: "Passionate animation programmer and technical animator with expertise in creating cutting-edge animation systems, procedural animation tools, and performative animation pipelines. Specialized in bridging the gap between artistic vision and technical implementation.",
-  skills: ["Unreal Engine ", "Unity ", "Blender ", "Cascadeur ", "Marvelous Designer ", "Maya ", "ZBrush ", "Python ", "C# ", "C++ ", "Houdini "]
-};
+// ─── Click-to-squash wrapper ────────────────────────────────────────────────
 
-const experiences = [
-  {
-    company: "Rifflix",
-    position: "Animation Programmer & Plugin Developer",
-    duration: "2025 - 2026",
-    description: "Developed animation tools and pipelines that were used to make an automated episode generation system using AI in Unreal Engine"
-  },
-  {
-    company: "Shader Labs",
-    position: "Lead Animation Director & Lead Gameplay and AI Programmer",
-    duration: "2023 - 2025",
-    description: "Developed animation tools and pipelines, implemented runtime animation systems, and made AAA quality animations for the Game 'Baoli'."
-  },
-  {
-    company: "India Game Lab",
-    position: "Specialist Instructor",
-    duration: "2024 - Present",
-    description: "Instructed character rigging and animation in Blender, Cascadeur & Unreal Engine, animation production with technical solutions."
+function Squishable({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const handleClick = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.classList.remove('animate-squash');
+    void el.offsetWidth;
+    el.classList.add('animate-squash');
+  }, []);
+  return (
+    <div ref={ref} onClick={handleClick} className={`cursor-pointer ${className}`} style={{ animation: 'none' }}>
+      {children}
+    </div>
+  );
+}
+
+// ─── Sticker — draggable sticker component ───────────────────────────────────
+
+interface StickerProps {
+  src: string;
+  alt: string;
+  className?: string;
+  rotate?: number;
+  size?: number;
+}
+function Sticker({ src, alt, className = "", rotate = 0, size = 96 }: StickerProps) {
+  const [drag, setDrag] = useState({ x: 0, y: 0 });
+  const [held, setHeld] = useState(false);
+  const start = useRef({ x: 0, y: 0, ox: 0, oy: 0 });
+
+  function onDown(e: React.PointerEvent<HTMLDivElement>) {
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    start.current = { x: e.clientX, y: e.clientY, ox: drag.x, oy: drag.y };
+    setHeld(true);
   }
-];
-
-const education = [
-  {
-    institution: "India Game Lab",
-    degree: "Professional Certificate",
-    field: "Unreal Engine Generalist",
-    duration: "2022 - 2024",
-    description: "Specialized in Unreal Engine, C++, Blueprint, Python, Lighting, Clothing, Crowd Simulation, Sound design, VFX , Texturing, Modeling, and Animation."
-  },
-  {
-    institution: "Various Courses",
-    degree: "Certificate Program",
-    field: "Programming",
-    duration: "2019 - 2022",
-    description: "Courses such as CS50, CS50X ,CS50G and various other courses on programming."
-  },
-  {
-    institution: "Babasaheb Bhimrao Ambedkar Bihar University",
-    degree: "Bachelor of Commerce - BCom, Accounts",
-    field: "Graduation Degree",
-    duration: "2023 - 2027",
-    description: "Currently Pursuing BCom, Accounts from Babasaheb Bhimrao Ambedkar Bihar University."
+  function onMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (!held) return;
+    setDrag({
+      x: start.current.ox + (e.clientX - start.current.x),
+      y: start.current.oy + (e.clientY - start.current.y),
+    });
   }
-];
+  function onUp() { setHeld(false); }
 
-const selectedProjects = [
+  return (
+    <div
+      onPointerDown={onDown}
+      onPointerMove={onMove}
+      onPointerUp={onUp}
+      onPointerCancel={onUp}
+      className={`group select-none touch-none ${held ? "cursor-grabbing" : "cursor-grab"} ${className}`}
+      style={{
+        transform: `translate(${drag.x}px, ${drag.y}px) rotate(${rotate}deg) scale(${held ? 1.08 : 1})`,
+        transition: held ? "none" : "transform 0.4s var(--ease-bounce)",
+        width: size,
+        height: size,
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        width={size}
+        height={size}
+        loading="lazy"
+        draggable={false}
+        className="w-full h-full object-contain sticker-shadow hover-squash"
+      />
+    </div>
+  );
+}
+
+// ─── Scroll Reveal ───────────────────────────────────────────────────────────
+
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add('visible'); obs.unobserve(el); } }, { threshold: 0.06 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return <div ref={ref} className={`reveal min-w-0 ${delay ? `reveal-d${delay}` : ''} ${className}`}>{children}</div>;
+}
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const PROJECTS = [
   {
-    title: "Procedural Locomotion System",
-    description: "Developed a solution that uses maths to move joints replicating human-like locomotions",
-    technologies: ["Unreal Engine", "C++", "Python"],
-    gifUrl: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnkzbzFtcXFjMjZsNXY2cDAwNTh6aTRjdWRxMmJodmMyZTJtZjE1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NKPx3RopZ7GZZJ49FB/giphy.gif"
+    title: "Baoli",
+    role: "Lead Animation Director",
+    year: "2025",
+    summary: "Arjun, a young man grappling with the mysterious disappearance of his brother and his own struggles with drug use, players must unravel the mystery behind his brother's disappearance, confront terrifying visions, and explore the ominous secrets of Baoli, an ancient stepwell with a dark past.",
+    stack: ["Unreal Engine", "C++", "Blender"],
+    accent: "bg-butter",
+    gif: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3347710/56d235fce914d96a3c5198311bee29cb5698d7cd/capsule_616x353.jpg?t=1745152007",
+    link: "https://store.steampowered.com/app/3347710/Baoli/",
   },
   {
-    title: "Procedural Rigs for Weaponary",
-    description: "Created a real-time rig that helps with animations that involve weaponary like guns",
-    technologies: ["Unreal Engine", "Blueprints", "Blender"],
-    gifUrl: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaG55cWo5MXFpbG45MnV6OGhwZG92N3ZoOWFhaGdvZHpzNGg3Zjh5YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pBoALtohXJe2TUShyM/giphy.gif"
+    title: "Procedural Locomotion",
+    role: "Animation Programmer",
+    year: "2025",
+    summary: "Maths-driven joint movement for human-like locomotion. Built a procedural animation system that generates natural walk and run cycles from parametric inputs in Unreal Engine.",
+    stack: ["Unreal Engine", "C++", "Python"],
+    accent: "bg-sakura",
+    gif: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnkzbzFtcXFjMjZsNXY2cDAwNTh6aTRjdWRxMmJodmMyZTJtZjE1cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NKPx3RopZ7GZZJ49FB/giphy.gif",
   },
   {
-    title: "Modular Rigs for Characters",
-    description: "Developed an automated rigging system that reduced character setup time by 80%",
-    technologies: ["Unreal Engine", "C++", "Blueprint"],
-    gifUrl: "https://d1iv7db44yhgxn.cloudfront.net/documentation/images/4cc043e6-bebf-4cc1-8947-eeaf8ed35efb/image_24.gif" // Replace with your actual GIF path
+    title: "AI Episode Generation",
+    role: "Technical Animator",
+    year: "2025",
+    summary: "Sequences and cutscenes with AI voicelines. Developed an automated episode generation pipeline that combines LLM-driven narrative with real-time animation in Unreal Engine.",
+    stack: ["Unreal Engine", "C++", "LLMs"],
+    accent: "bg-mint",
+    gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXA0ZzI2Z2UxNDgzdnRvdGtlcW50a2NudzIwOHAwNjBxbnI1czJwZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qaZjqbBLOtPM8mjKyb/giphy.gif",
   },
+
   {
-    title: "AI System with Motion Matching",
-    description: "Designed a system that uses Unreal's built in Path finding to work with Motion Matching",
-    technologies: ["Unreal Engine", "Cascadeur", "Motion Matching"],
-    gifUrl: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNzdGpscjRtOXRsaGc1Z3pzbmszajYwMnBveXVzMWZpdXQ0bGE4byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LyHSd0kiAczp02i1OI/giphy.gif"
+    title: "Modular Character Rigs",
+    role: "Tools Programmer",
+    year: "2024",
+    summary: "Automated rigging system that cut character setup time by 80%. Built modular rig components that snap together for rapid prototyping in Unreal Engine.",
+    stack: ["Unreal Engine", "C++", "Blueprint"],
+    accent: "bg-lavender",
+    gif: "https://d1iv7db44yhgxn.cloudfront.net/documentation/images/4cc043e6-bebf-4cc1-8947-eeaf8ed35efb/image_24.gif",
   },
+
   {
     title: "Motion Matching Systems",
-    description: "Built various types of motion matching systems for a lot of different characters",
-    technologies: ["MotionBuilder", "Cascadeur", "Blender", "Unreal Engine"],
-    gifUrl: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmxmNHlobjVxd2l1bDBtbWZ4ZWl6enFwZ2l1OW1kNm55YWc3c3JoaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KEfcE2RUMzEEX97syC/giphy.gif"
+    role: "Technical Animator",
+    year: "2024",
+    summary: "Various motion matching setups for different characters. Built reusable motion matching pipelines adaptable to diverse character types and movement styles.",
+    stack: ["MotionBuilder", "Cascadeur", "Blender"],
+    accent: "bg-mint",
+    gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmxmNHlobjVxd2l1bDBtbWZ4ZWl6enFwZ2l1OW1kNm55YWc3c3JoaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KEfcE2RUMzEEX97syC/giphy.gif",
   },
-  {
-    title: "Episode Generation with AI",
-    description: "Created a system for generating sequences and cutscenes with voicelines using AI",
-    technologies: ["Unreal Engine", "C++", "LLMs", "MCP"],
-    gifUrl: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXA0ZzI2Z2UxNDgzdnRvdGtlcW50a2NudzIwOHAwNjBxbnI1czJwZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qaZjqbBLOtPM8mjKyb/giphy.gif"
-  }
 ];
 
-// Sample recognition & awards data - replace with your actual awards
-const recognitionAwards = [
+const EXPERIENCE = [
   {
-    title: "Baoli Featured at India Game Utsav 2025",
-    organization: "ShaderLabs",
-    year: "2025",
-    description: "Baoli, the game I worked on, was featured at India Game Utsav 2025."
-  }
+    role: "Animation Programmer & Plugin Developer",
+    company: "Rifflix",
+    period: "2025 — 2026",
+    location: "Remote",
+    bullets: [
+      "Developed animation tools and pipelines for an automated episode generation system using AI in Unreal Engine.",
+      "Built runtime animation state machines and blend tree systems for real-time character control.",
+      "Integrated LLM-driven narrative with procedural animation pipelines.",
+    ],
+  },
+  {
+    role: "Animation Director & AI Programmer",
+    company: "Shader Labs",
+    period: "2023 — 2025",
+    location: "India",
+    bullets: [
+      "Developed animation tools, runtime systems, and AAA quality animations for the game 'Baoli'.",
+      "Directed the animation team and established production pipelines.",
+      "Featured at Indie Game Utsav 2025.",
+    ],
+  },
+  {
+    role: "Specialist Instructor",
+    company: "India Game Lab",
+    period: "2024 — Present",
+    location: "India",
+    bullets: [
+      "Instructed character rigging and animation in Blender, Cascadeur & Unreal Engine.",
+      "Mentored students on procedural animation and runtime systems.",
+    ],
+  },
 ];
 
-// Sample animation data - replace with your actual GIFs
-const animationShowcase = [
+const EDUCATION = [
   {
-    title: "Character Walk Cycle",
-    gifUrl: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmJ5dXFjY2xyc3draGx0N29tZ3RtbGM1eXR0eTd5cG5vdXBhMGJmcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5POKjGZK3nEgDDbKri/giphy.gif", // Replace with actual GIF paths
-    alt: "Character walking animation"
+    school: "India Game Lab",
+    degree: "Professional Certificate — Unreal Engine Generalist",
+    period: "2022 — 2024",
+    note: "Unreal Engine, C++, Blueprint, Python, Lighting, VFX, Animation. Intensive program on game development and real-time animation.",
   },
   {
-    title: "Smacking a TV (Baoli)",
-    gifUrl: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRjNGthZTZvb253M3ZvcXlzeWcyNGNwdTlka2FuaWpteGs3NTZtZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HzL5ngJCFDWoMMtZ2S/giphy.gif",
-    alt: "Smacking a TV (Baoli)"
+    school: "Various Courses",
+    degree: "Certificate Program — Programming",
+    period: "2019 — 2022",
+    note: "CS50, CS50X, CS50G and various other courses on programming fundamentals and computer science.",
   },
-  {
-    title: "Waking Up (Baoli)",
-    gifUrl: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2RmcGxoanY1M3RqZzY3ZGZjc29iNGRsOWt3emp5NGw5ZjFhNGs4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/V5YrXqn96hrqi6PPQS/giphy.gif",
-    alt: "Waking Up (Baoli)"
-  },
-  {
-    title: "Glasses Animation (Baoli)",
-    gifUrl: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWN2a2lwcTFsNGhnOWw5eHczZTRjcmw2Z3FwNTJ0Z3lwNWt4YjN3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/grJUJHKWMMfrRTSZgH/giphy.gif",
-    alt: "Glasses Animation (Baoli)"
-  },
-  {
-    title: "Lighter Animation (Baoli)",
-    gifUrl: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXF0eDJjZzhjMzRsbmw0d2xoanAydXlrbzZndjZkbnl0Ym9ibjJqdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qLVmoR6q3NYhnJh4Qe/giphy.gif",
-    alt: "Lighter Animation (Baoli)"
-  },
-  {
-    title: "Sit (Baoli)",
-    gifUrl: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3IyNDFqYm83MnR5OTJra2k4Mjlubm9qdTR0NHF0NHVvajkxaHdkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SH9uV4tjhmSYcVrFxv/giphy.gif",
-    alt: "Sit on Couch (Baoli)"
-  }
 ];
+
+const SKILLS = [
+  { group: "Languages", items: ["C++", "C#", "Python", "Blueprint", "HLSL"] },
+  { group: "Engines", items: ["Unreal Engine", "Unity", "Cascadeur", "MotionBuilder"] },
+  { group: "DCC Tools", items: ["Blender", "Maya", "ZBrush", "Houdini"] },
+  { group: "Domains", items: ["Procedural Animation", "Motion Matching", "Runtime Rigs", "Tool Development"] },
+];
+
+const ANIMATIONS = [
+  { title: "Walk Cycle", gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmJ5dXFjY2xyc3draGx0N29tZ3RtbGM1eXR0eTd5cG5vdXBhMGJmcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5POKjGZK3nEgDDbKri/giphy.gif", rotate: -3 },
+  { title: "TV Smack", gif: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRjNGthZTZvb253M3ZvcXlzeWcyNGNwdTlka2FuaWpteGs3NTZtZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HzL5ngJCFDWoMMtZ2S/giphy.gif", rotate: 2 },
+  { title: "Waking Up", gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2RmcGxoanY1M3RqZzY3ZGZjc29iNGRsOWt3emp5NGw5ZjFhNGs4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/V5YrXqn96hrqi6PPQS/giphy.gif", rotate: -1 },
+  { title: "Glasses", gif: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWN2a2lwcTFsNGhnOWw5eHczZTRjcmw2Z3FwNTJ0Z3lwNWt4YjN3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/grJUJHKWMMfrRTSZgH/giphy.gif", rotate: 3 },
+  { title: "Lighter", gif: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXF0eDJjZzhjMzRsbmw0d2xoanAydXlrbzZndjZkbnl0Ym9ibjJqdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qLVmoR6q3NYhnJh4Qe/giphy.gif", rotate: -2 },
+  { title: "Sit Down", gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3IyNDFqYm83MnR5OTJra2k4Mjlubm9qdTR0NHF0NHVvajkxaHdkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SH9uV4tjhmSYcVrFxv/giphy.gif", rotate: 1 },
+];
+
+// ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeAnim, setActiveAnim] = useState<number | null>(null);
 
-  // Handle client-side hydration
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return null;
-  }
-
-
+  if (!mounted) return null;
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${isDarkMode
-      ? 'bg-gradient-to-br from-slate-800 to-slate-900'
-      : 'bg-gradient-to-br from-gray-100 to-orange-100'
-      }`}>
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
 
+      {/* ─── Top Navigation ──────────────────────────────────────────────── */}
 
-      {/* Header */}
-      <header className={`shadow-lg transition-colors duration-500 ${isDarkMode ? 'bg-slate-800' : 'bg-slate-600'
-        }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-center space-x-8">
-            {/* Profile Picture */}
-            <div className="flex-shrink-0">
-              <div className="relative w-40 h-40 bg-gradient-to-br from-white via-gray-50 to-gray-200 rounded-full p-2 shadow-2xl transform hover:scale-105 transition-all duration-300">
-                {/* Inner shadow for depth */}
-                <div className="absolute inset-2 rounded-full shadow-inner bg-gradient-to-br from-gray-100 to-white"></div>
-                <div className="relative w-full h-full bg-slate-400 rounded-full overflow-hidden shadow-lg ring-2 ring-white/50">
-                  <Image
-                    src={`${basePath}/images/profile.png`}
-                    alt="Parth Sarthi - Profile Photo"
-                    width={160}
-                    height={160}
-                    className="w-full h-full object-cover"
-                    priority
-                  />
-                  {/* Subtle highlight overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-black/10 rounded-full"></div>
-                </div>
-              </div>
-            </div>
+      <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-foreground/5">
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-10 h-14">
+          <a href="#top" className="font-display text-xl tracking-wide">
+            PARTH<span className="text-sakura">.</span>SARTHI
+          </a>
+          <div className="hidden md:flex gap-6 font-mono text-[11px] tracking-widest uppercase">
+            <a href="#about" className="hover:text-sakura transition-colors">About</a>
+            <a href="#projects" className="hover:text-sakura transition-colors">Projects</a>
+            <a href="#experience" className="hover:text-sakura transition-colors">Experience</a>
+            <a href="#animations" className="hover:text-sakura transition-colors">Animations</a>
+            <a href="#education" className="hover:text-sakura transition-colors">Education</a>
+            <a href="#contact" className="hover:text-sakura transition-colors">Contact</a>
+          </div>
+          <a
+            href="#contact"
+            className="font-mono text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 bg-foreground text-background rounded-full hover:bg-sakura hover:text-foreground transition-colors"
+          >
+            Hire me
+          </a>
+        </div>
+      </nav>
 
-            {/* Text Content */}
-            <div className="text-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
-                {professionalSummary.name}
-              </h1>
-              <p className="text-xl text-slate-100 font-medium mb-2">
-                {professionalSummary.title}
-              </p>
-              <p className="text-md text-slate-200 flex items-center justify-center -ml-8">
-                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                </svg>
-                {professionalSummary.location}
-              </p>
+      {/* ─── Hero ────────────────────────────────────────────────────────── */}
+
+      <header id="top" className="relative min-h-[80vh] flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16">
+        <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-8 relative">
+            <span className="font-mono text-xs tracking-[0.3em] opacity-60">
+              ANIMATION PROGRAMMER &nbsp;·&nbsp; TECHNICAL ANIMATOR
+            </span>
+            <h1 className="font-display text-[clamp(3rem,9vw,7.5rem)] leading-[0.9] tracking-tight animate-pop mt-4">
+              I speak <span className="text-sakura">fluent</span><br />
+              <span className="font-serif italic normal-case text-[0.78em] tracking-tight">motion.</span>
+            </h1>
+            <p className="mt-8 max-w-xl text-lg text-foreground/70 leading-relaxed">
+              I&apos;m Parth — an animation programmer and technical animator based in Navi Mumbai, Maharashtra, India. I write animation systems, procedural tools, and the runtime glue that lets characters move with personality.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover-squash"
+              >
+                See projects →
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-card transition-colors"
+              >
+                Download CV
+              </a>
             </div>
           </div>
+
+          {/* Mascot */}
+          <div className="lg:col-span-4 relative flex justify-center">
+            <Squishable className="relative animate-float">
+              <img
+                src={`${basePath}/mascot/mascot-hero.png`}
+                alt="Parth's mascot"
+                width={240}
+                height={240}
+                className="w-52 h-52 lg:w-60 lg:h-60 sticker-shadow rotate-6"
+              />
+              <div className="absolute -top-3 -right-1 bg-sakura text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full font-mono tracking-wider shadow-md rotate-12">
+                HI!
+              </div>
+            </Squishable>
+          </div>
+        </div>
+
+        {/* Decorative stickers */}
+        <Sticker src={`${basePath}/mascot/sticker-star.png`} alt="" className="absolute top-32 left-6 hidden md:block" rotate={-12} size={64} />
+        <Sticker src={`${basePath}/mascot/mascot-pink.png`} alt="" className="absolute bottom-32 right-16 hidden lg:block animate-wiggle" rotate={8} size={56} />
+        <Sticker src={`${basePath}/mascot/mascot-mint.png`} alt="" className="absolute bottom-20 left-[15%] hidden lg:block animate-float-slow" rotate={-6} size={48} />
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+          <span className="font-mono text-[9px] tracking-widest uppercase">scroll</span>
+          <div className="w-px h-6 bg-foreground/30 animate-pulse" />
         </div>
       </header>
 
-      {/* Contact Buttons */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-center space-x-6">
-          {/* LinkedIn Button */}
-          <a
-            href="https://www.linkedin.com/in/parth-sarthi-9a1143289"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-              }`}
-          >
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-            LinkedIn
-          </a>
+      {/* ─── 01 — About ──────────────────────────────────────────────────── */}
 
-          {/* Email Button */}
-          <a
-            href="mailto:parthsarthi1208@gmail.com"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-              }`}
-          >
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h3.819v.273L12 8.773l6.545-4.679V3.82h3.819c.904 0 1.636.733 1.636 1.637z" />
-            </svg>
-            Email
-          </a>
+      <section id="about" className="px-6 lg:px-10 py-24 border-t border-foreground/5">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10">
+          <Reveal className="lg:col-span-4">
+            <span className="font-mono text-xs tracking-widest opacity-60">01 — ABOUT</span>
+            <h2 className="font-display text-4xl lg:text-5xl mt-2">Half engineer, half animator.</h2>
+            <img
+              src={`${basePath}/images/profile.png`}
+              alt="Parth Sarthi"
+              width={200}
+              height={200}
+              className="mt-6 w-40 h-40 rounded-2xl object-cover sticker-shadow"
+            />
+          </Reveal>
+          <Reveal className="lg:col-span-8 space-y-5 text-foreground/80 leading-relaxed" delay={1}>
+            <p>
+              I started with Unreal Engine and C++, building animation blueprints and runtime tools. Over time I drifted deeper into code when I got tired of waiting for tools to catch up with ideas. Today I split my time between low-level runtime systems (procedural locomotion, motion matching, modular rigs) and the editor-side workflows that animators actually touch every day.
+            </p>
+            <p>
+              I care about <em className="font-serif italic">snappy iteration loops</em>, readable APIs for non-engineers, and the small details — easing curves, anticipation, follow-through — that make characters feel handmade even when they&apos;re driven by math.
+            </p>
+            <div className="grid grid-cols-3 gap-4 pt-4">
+                {[
+                  { k: "4+", v: "Years shipping" },
+                  { k: "3", v: "Projects shipped" },
+                  { k: "5", v: "Roles held" },
+                ].map((s) => (
+                <div key={s.v} className="p-4 bg-card rounded-2xl border border-foreground/5">
+                  <div className="font-display text-3xl text-sakura">{s.k}</div>
+                  <div className="font-mono text-[10px] tracking-widest uppercase opacity-60 mt-1">{s.v}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-          {/* Phone Button */}
-          <a
-            href="tel:+917506087041"
-            className={`flex items-center px-6 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-300 shadow-md hover:shadow-lg ${isDarkMode
-              ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-              : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-              }`}
+      {/* ─── 02 — Projects ───────────────────────────────────────────────── */}
+
+      <section id="projects" className="px-6 lg:px-10 py-24 border-t border-foreground/5 relative">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <span className="font-mono text-xs tracking-widest opacity-60">02 — PROJECTS</span>
+                <h2 className="font-display text-4xl lg:text-5xl mt-2">Selected work</h2>
+              </div>
+              <span className="font-mono text-xs tracking-widest opacity-50 hidden sm:block">2023 — 2026</span>
+            </div>
+          </Reveal>
+
+          <div className="space-y-10">
+            {PROJECTS.map((p, i) => (
+              <Reveal key={i} delay={(i % 3) + 1}>
+                <article className={`group grid md:grid-cols-12 gap-6 p-6 bg-card rounded-3xl border border-foreground/5 hover:-translate-y-1 hover:shadow-2xl transition-all duration-500 ${p.link ? 'cursor-pointer' : ''}`} onClick={p.link ? () => window.open(p.link, '_blank') : undefined}>
+                  <div className="md:col-span-5 relative overflow-hidden rounded-2xl aspect-[4/3]">
+                    <div className={`absolute inset-0 ${p.accent} opacity-20`} />
+                    <img
+                      src={p.gif}
+                      alt={p.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <span className="absolute top-3 left-3 font-mono text-[10px] tracking-widest bg-background/90 px-2 py-1 rounded-full">
+                      0{i + 1}
+                    </span>
+                  </div>
+                  <div className="md:col-span-7 flex flex-col">
+                    <div className="flex items-center gap-3 font-mono text-[10px] tracking-widest uppercase opacity-60">
+                      <span>{p.role}</span>
+                      <span>·</span>
+                      <span>{p.year}</span>
+                    </div>
+                    <h3 className="font-display text-3xl lg:text-4xl mt-2">{p.title}</h3>
+                    <p className="mt-3 text-foreground/75 leading-relaxed">{p.summary}</p>
+                    <div className="mt-auto pt-5 flex flex-wrap gap-2 items-center">
+                      {p.stack.map((s) => (
+                        <span
+                          key={s}
+                          className="font-mono text-[10px] tracking-widest uppercase px-2.5 py-1 bg-background border border-foreground/10 rounded-full"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                      {p.link && (
+                        <a href={p.link} target="_blank" rel="noopener noreferrer" className="ml-auto font-mono text-[10px] tracking-widest uppercase text-sakura hover:underline" onClick={(e) => e.stopPropagation()}>
+                          View on Steam →
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <Sticker src={`${basePath}/mascot/mascot-pink.png`} alt="" className="absolute -right-2 top-20 hidden lg:block" rotate={12} size={80} />
+      </section>
+
+      {/* ─── 03 — Experience ─────────────────────────────────────────────── */}
+
+      <section id="experience" className="px-6 lg:px-10 py-24 border-t border-foreground/5">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10">
+          <Reveal className="lg:col-span-4">
+            <span className="font-mono text-xs tracking-widest opacity-60">03 — EXPERIENCE</span>
+            <h2 className="font-display text-4xl lg:text-5xl mt-2">Where I&apos;ve worked</h2>
+          </Reveal>
+          <Reveal className="lg:col-span-8 space-y-6" delay={1}>
+            {EXPERIENCE.map((job) => (
+              <div
+                key={job.role}
+                className="p-6 bg-card rounded-2xl border border-foreground/5 hover:border-sakura/40 transition-colors"
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="font-display text-2xl">{job.role}</h3>
+                  <span className="font-mono text-[11px] tracking-widest uppercase opacity-60">
+                    {job.period}
+                  </span>
+                </div>
+                <div className="font-serif italic text-foreground/70 mt-1">
+                  {job.company} · {job.location}
+                </div>
+                <ul className="mt-4 space-y-2 text-foreground/75">
+                  {job.bullets.map((b) => (
+                    <li key={b} className="flex gap-3">
+                      <span className="text-sakura mt-1.5">●</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── Animation Showcase ─────────────────────────────────────────────── */}
+
+      <section id="animations" className="px-6 lg:px-10 py-12 border-t border-foreground/5 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <span className="font-mono text-xs tracking-widest opacity-60">ANIMATIONS</span>
+            <h2 className="font-display text-3xl lg:text-4xl mt-2 mb-8">Hover to play</h2>
+          </Reveal>
+          <div className="flex gap-6 items-start justify-start flex-wrap lg:flex-nowrap">
+            {ANIMATIONS.map((a, i) => (
+              <Reveal key={i} delay={(i % 4) + 1}>
+                <div
+                  className="group relative cursor-pointer shrink-0"
+                  style={{ transform: `rotate(${a.rotate}deg)`, transition: 'transform 0.3s var(--ease-bounce)' }}
+                  onClick={() => setActiveAnim(i)}
+                >
+                  {/* Thumbnail with 3D shadow */}
+                  <div
+                    className="w-36 h-24 lg:w-44 lg:h-28 rounded-xl overflow-hidden border-2 border-foreground/10 bg-card relative transition-all duration-300 group-hover:border-sakura/40"
+                    style={{ boxShadow: '8px 12px 0px rgba(0,0,0,0.10), 12px 16px 24px rgba(0,0,0,0.08)' }}
+                  >
+                    <img
+                      src={a.gif}
+                      alt={a.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Animation Overlay ─────────────────────────────────────────────── */}
+      {activeAnim !== null && (
+        <div
+          className="fixed inset-0 z-[200] bg-black/70 backdrop-blur-sm flex items-center justify-center cursor-pointer"
+          onClick={() => setActiveAnim(null)}
+        >
+          <div
+            className="relative w-[80vw] max-w-2xl aspect-video rounded-2xl overflow-hidden border-2 border-white/10"
+            style={{ boxShadow: '0 20px 60px rgba(0,0,0,0.5)', animation: 'entrance-pop 0.4s var(--ease-bounce) both' }}
           >
-            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-            </svg>
-            Phone
-          </a>
+            <img
+              src={ANIMATIONS[activeAnim].gif}
+              alt={ANIMATIONS[activeAnim].title}
+              className="w-full h-full object-cover"
+            />
+            <span className="absolute bottom-4 left-4 font-mono text-xs tracking-widest uppercase bg-background/80 px-3 py-1.5 rounded-full">
+              {ANIMATIONS[activeAnim].title}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* ─── 04 — Skills & Tools ─────────────────────────────────────────── */}
+
+      <section className="px-6 lg:px-10 py-24 border-t border-foreground/5">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <span className="font-mono text-xs tracking-widest opacity-60">04 — TOOLBOX</span>
+            <h2 className="font-display text-4xl lg:text-5xl mt-2 mb-10">Skills & tools</h2>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {SKILLS.map((s, i) => (
+              <Reveal key={i} delay={i + 1}>
+                <div
+                  className={`p-6 rounded-2xl border border-foreground/10 ${
+                    ["bg-sakura/30", "bg-mint/40", "bg-butter/40", "bg-lavender/40"][i]
+                  }`}
+                >
+                  <h3 className="font-display text-xl mb-3">{s.group}</h3>
+                  <ul className="space-y-1.5 font-mono text-[12px]">
+                    {s.items.map((it) => (
+                      <li key={it}>— {it}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 05 — Education ──────────────────────────────────────────────── */}
+
+      <section id="education" className="px-6 lg:px-10 py-24 border-t border-foreground/5">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-10">
+          <Reveal className="lg:col-span-4">
+            <span className="font-mono text-xs tracking-widest opacity-60">05 — EDUCATION</span>
+            <h2 className="font-display text-4xl lg:text-5xl mt-2">Where I learned</h2>
+          </Reveal>
+          <Reveal className="lg:col-span-8 space-y-5" delay={1}>
+            {EDUCATION.map((e) => (
+              <div key={e.school} className="p-6 bg-card rounded-2xl border border-foreground/5">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="font-display text-2xl">{e.school}</h3>
+                  <span className="font-mono text-[11px] tracking-widest uppercase opacity-60">
+                    {e.period}
+                  </span>
+                </div>
+                <div className="font-serif italic text-foreground/70 mt-1">{e.degree}</div>
+                <p className="mt-3 text-foreground/75">{e.note}</p>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── Marquee ─────────────────────────────────────────────────────── */}
+
+      <div className="w-full overflow-hidden bg-foreground py-3 border-y-2 border-sakura">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <span
+              key={i}
+              className="text-background font-mono text-xs font-bold tracking-widest px-8 uppercase shrink-0"
+            >
+              OPEN TO NEW ROLES ✦ ANIMATION PROGRAMMER ✦ TECHNICAL ARTIST ✦ TOOLS &amp; PIPELINE ✦
+            </span>
+          ))}
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-16">
-        {/* Professional Summary */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-6 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Professional Summary
+      {/* ─── 06 — Contact ────────────────────────────────────────────────── */}
+
+      <footer
+        id="contact"
+        className="relative px-6 lg:px-10 py-28 bg-card border-t border-foreground/5 overflow-hidden"
+      >
+        <div className="absolute top-10 left-10 animate-float-slow hidden md:block">
+          <Squishable>
+            <img src={`${basePath}/mascot/mascot-mint.png`} alt="" width={120} height={120} className="w-24 h-24 sticker-shadow" />
+          </Squishable>
+        </div>
+
+        <div className="max-w-3xl mx-auto text-center relative">
+          <span className="font-mono text-xs tracking-[0.3em] opacity-60">06 — CONTACT</span>
+          <h2 className="font-display text-5xl lg:text-7xl my-6">
+            Let&apos;s build something <span className="text-sakura">animated</span>.
           </h2>
-          <p className={`text-lg mb-6 leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-            }`}>
-            {professionalSummary.summary}
+          <p className="text-foreground/70 max-w-md mx-auto mb-10">
+            I&apos;m currently open to full-time roles and select contract work in
+            animation tools, rigging, and runtime systems.
           </p>
-          <div>
-            <h3 className={`text-xl font-semibold mb-4 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-              }`}>
-              Key Skills & Expertise
-            </h3>
-            <div className="flex flex-wrap gap-3">
-              {professionalSummary.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className={`px-4 py-2 border-2 rounded-full text-sm font-semibold transition-all duration-300 ${isDarkMode
-                    ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-slate-200 border-slate-600 hover:bg-gradient-to-r hover:from-slate-600 hover:to-slate-700 hover:text-white hover:border-slate-500'
-                    : 'bg-gradient-to-r from-slate-100 to-slate-200 text-slate-600 border-slate-300 hover:bg-gradient-to-r hover:from-slate-400 hover:to-slate-500 hover:text-white hover:border-slate-500'
-                    }`}
-                >
-                  {skill}
-                </span>
-              ))}
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href="mailto:contact@parthsarthi.dev" className="px-6 py-3 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover-squash">
+              contact@parthsarthi.dev
+            </a>
+            <a href="https://github.com/Braga1913" className="px-6 py-3 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-background transition-colors">
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className="px-6 py-3 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-background transition-colors">
+              LinkedIn
+            </a>
+          </div>
+
+          <div className="mt-16 p-5 border border-dashed border-foreground/15 rounded-2xl flex flex-col sm:flex-row items-center gap-4 sm:gap-0 justify-between">
+            <div className="text-left">
+              <span className="font-mono text-[10px] opacity-50 tracking-widest">CURRENT STATUS</span>
+              <p className="font-bold mt-1">Available · Spring 2026</p>
+            </div>
+            <div className="flex -space-x-2">
+              <div className="size-9 rounded-full bg-sakura border-2 border-card" />
+              <div className="size-9 rounded-full bg-mint border-2 border-card" />
+              <div className="size-9 rounded-full bg-butter border-2 border-card" />
+              <div className="size-9 rounded-full bg-lavender border-2 border-card" />
             </div>
           </div>
-        </section>
 
-        {/* Experience Board */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Experience
-          </h2>
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <div key={index} className="border-l-4 border-orange-400 pl-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                    }`}>
-                    {exp.position}
-                  </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                    }`}>
-                    {exp.duration}
-                  </span>
-                </div>
-                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
-                  {exp.company}
-                </h4>
-                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                  }`}>
-                  {exp.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Education
-          </h2>
-          <div className="space-y-8">
-            {education.map((edu, index) => (
-              <div key={index} className="border-l-4 border-green-500 pl-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                    }`}>
-                    {edu.degree}
-                  </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                    }`}>
-                    {edu.duration}
-                  </span>
-                </div>
-                <h4 className={`text-lg font-medium mb-1 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
-                  {edu.institution}
-                </h4>
-                <h5 className={`text-md font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                  }`}>
-                  {edu.field}
-                </h5>
-                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                  }`}>
-                  {edu.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Recognition & Awards */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Recognition & Awards
-          </h2>
-          <div className="space-y-6">
-            {recognitionAwards.map((award, index) => (
-              <div key={index} className="border-l-4 border-blue-400 pl-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h3 className={`text-xl font-semibold transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                    }`}>
-                    {award.title}
-                  </h3>
-                  <span className={`text-sm font-medium transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                    }`}>
-                    {award.year}
-                  </span>
-                </div>
-                <h4 className={`text-lg font-medium mb-3 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-                  }`}>
-                  {award.organization}
-                </h4>
-                <p className={`leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-400' : 'text-slate-400'
-                  }`}>
-                  {award.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Selected Projects */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Selected Projects
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {selectedProjects.map((project, index) => (
-              <div key={index} className="group relative rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer h-80">
-                {/* Background GIF */}
-                <div className="absolute inset-0">
-                  {/* Placeholder for GIF - replace with actual Image component when you have GIFs */}
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 animate-pulse">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <p className="text-sm opacity-75">GIF Preview</p>
-                      </div>
-                    </div>
-                  </div>
-                  <Image
-                    src={project.gifUrl}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    unoptimized // Add this for GIFs
-                  />
-                </div>
-
-                {/* Overlay with content */}
-                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-300 p-6">
-                  {/* Default state: content at bottom */}
-                  <div className="h-full flex flex-col justify-end group-hover:hidden transition-all duration-500 ease-in-out">
-                    <h3 className="text-white font-bold mb-3 text-xl transition-all duration-700 ease-in-out">
-                      {project.title}
-                    </h3>
-                    <p className="text-white/90 mb-4 leading-relaxed text-sm transition-opacity duration-300 ease-in-out">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 transition-opacity duration-300 ease-in-out">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1 bg-white/20 text-white rounded-full text-xs backdrop-blur-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Hover state: only title at bottom, smaller */}
-                  <div className="h-full hidden group-hover:flex flex-col justify-end transition-all duration-700 ease-in-out">
-                    <h3 className="text-white font-semibold text-lg transition-all duration-700 ease-in-out">
-                      {project.title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Animation Showcase Grid */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-50/70'
-          }`}>
-          <h2 className={`text-3xl font-bold mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Animation Showcase
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {animationShowcase.map((animation, index) => (
-              <div key={index} className="group cursor-pointer">
-                <div className={`rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 ${isDarkMode ? 'bg-slate-700/50' : 'bg-gray-100/50'
-                  }`}>
-                  <div className={`aspect-video relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gradient-to-br from-slate-700 to-slate-800' : 'bg-gradient-to-br from-gray-100 to-orange-100'
-                    }`}>
-                    <Image
-                      src={animation.gifUrl}
-                      alt={animation.alt}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      unoptimized // Add this for GIFs
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className={`text-lg font-medium text-center transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                      }`}>
-                      {animation.title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section className={`backdrop-blur-sm rounded-lg shadow-lg p-8 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800/70' : 'bg-gray-100/50'
-          }`}>
-          <h2 className={`text-3xl font-bold text-center mb-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-            }`}>
-            Get In Touch
-          </h2>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className={`text-lg mb-8 leading-relaxed transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-500'
-              }`}>
-              I&apos;m always interested in discussing new opportunities, collaborations, or just talking about animation and technology. Feel free to reach out!
-            </p>
-
-            {/* Contact Methods */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Email */}
-              <div className="text-center">
-                <a href="mailto:parthsarthi1208@gmail.com" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                    }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
-                  Email
-                </h3>
-                <a
-                  href="mailto:parthsarthi1208@gmail.com"
-                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                    }`}
-                >
-                  parthsarthi1208@gmail.com
-                </a>
-              </div>
-
-              {/* Phone */}
-              <div className="text-center">
-                <a href="tel:+917506087041" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                    }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                      }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
-                  Phone
-                </h3>
-                <a
-                  href="tel:+917506087041"
-                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                    }`}
-                >
-                  +91 7506087041
-                </a>
-              </div>
-
-              {/* LinkedIn */}
-              <div className="text-center">
-                <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className="block">
-                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${isDarkMode ? 'bg-slate-700 hover:bg-slate-600' : 'bg-slate-200 hover:bg-slate-300'
-                    }`}>
-                    <svg className={`w-8 h-8 transition-colors duration-500 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                      }`} fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </div>
-                </a>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-600'
-                  }`}>
-                  LinkedIn
-                </h3>
-                <a
-                  href="https://www.linkedin.com/in/parth-sarthi-9a1143289"
-                  className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-500 hover:text-slate-700'
-                    }`}
-                >
-                  Connect with me
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className={`border-t mt-16 transition-colors duration-500 ${isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-slate-600 border-slate-500'
-        }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <p className={`transition-colors duration-500 ${isDarkMode ? 'text-slate-200' : 'text-slate-100'
-              }`}>
-              © 2024 {professionalSummary.name}. All rights reserved.
-            </p>
-            <div className="mt-4 flex justify-center space-x-6">
-              <a href="https://www.linkedin.com/in/parth-sarthi-9a1143289" className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
-                }`}>
-                <span className="sr-only">LinkedIn</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a href="https://github.com/Braga1913" className={`transition-colors duration-300 ${isDarkMode ? 'text-slate-300 hover:text-white' : 'text-slate-200 hover:text-white'
-                }`}>
-                <span className="sr-only">GitHub</span>
-                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            </div>
-          </div>
+          <p className="mt-10 font-mono text-[10px] tracking-widest opacity-40">
+            © 2026 PARTH SARTHI · BUILT WITH CODE &amp; IMAGINATION
+          </p>
         </div>
       </footer>
-
-      {/* Dark Mode Toggle Button */}
-      <button
-        onClick={toggleDarkMode}
-        className={`fixed top-6 right-6 w-14 h-14 rounded-full shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl z-50 ${isDarkMode
-          ? 'bg-yellow-400 text-gray-900 hover:bg-yellow-300'
-          : 'bg-slate-600 text-white hover:bg-slate-500'
-          }`}
-        style={{
-          transition: 'background-color 0.3s ease'
-        }}
-        aria-label="Toggle dark mode"
-      >
-        <div className="flex items-center justify-center w-full h-full">
-          {isDarkMode ? (
-            // Sun icon for light mode
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
-            </svg>
-          ) : (
-            // Moon icon for dark mode
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd" />
-            </svg>
-          )}
-        </div>
-      </button>
     </div>
   );
 }

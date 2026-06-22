@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parth Sarthi — Animator Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400;1,500&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1a1a2e;
+    --muted: #6b7280;
+    --accent: #c06080;
+    --bg: #ffffff;
+  }
+
+  @media print {
+    body { font-size: 11pt; }
+    .page { box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
+    a { text-decoration: none !important; color: var(--ink) !important; }
+    .no-print { display: none !important; }
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: #f0f0f0;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 800px;
+    margin: 20px auto;
+    background: var(--bg);
+    padding: 48px 56px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+
+  /* Header */
+  .header { margin-bottom: 28px; border-bottom: 2px solid var(--ink); padding-bottom: 20px; }
+  .header h1 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.5px; line-height: 1.1; }
+  .header h1 span { color: var(--accent); }
+  .header .subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--muted); margin-top: 4px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+  .contact span { color: var(--muted); }
+
+  /* Sections */
+  .section { margin-bottom: 22px; }
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+  }
+
+  /* Entry */
+  .entry { margin-bottom: 14px; }
+  .entry-header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .entry-title { font-weight: 600; font-size: 14px; }
+  .entry-meta { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  .entry-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 4px; }
+  .entry ul { padding-left: 18px; font-size: 13px; line-height: 1.55; }
+  .entry li { margin-bottom: 3px; }
+  .entry li::marker { color: var(--accent); }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; font-size: 13px; }
+  .skill-row { display: flex; gap: 6px; }
+  .skill-label { font-weight: 600; min-width: 100px; }
+  .skill-items { color: var(--muted); }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Parth <span>Sarthi</span></h1>
+    <div class="subtitle">Animator</div>
+    <div class="contact">
+      <span>contact@parthsarthi.dev</span>
+      <span>Navi Mumbai, India</span>
+      <span>linkedin.com/in/parth-sarthi</span>
+      <span>github.com/Braga1913</span>
+      <span>braga1913.github.io/portfolio-site/</span>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p style="font-size:13px;">
+      Animator with 4+ years of experience shipping game-ready character animation. Proven track record directing animation on a shipped Steam title (Baoli), building procedural locomotion systems, and producing AAA-quality character performances in Unreal Engine. Passionate about bringing characters to life through principled, expressive animation.
+    </p>
+  </div>
+
+  <!-- Experience -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Animation Director & AI Programmer</span>
+        <span class="entry-meta">2023 — 2025</span>
+      </div>
+      <div class="entry-sub">Shader Labs · India</div>
+      <ul>
+        <li>Led animation direction for Baoli, a narrative horror game shipped on Steam.</li>
+        <li>Created AAA-quality character animations including walk cycles, idle states, and cinematic sequences.</li>
+        <li>Directed the animation team and established production pipelines for consistent quality.</li>
+        <li>Featured at Indie Game Utsav 2025.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Animation Programmer & Plugin Developer</span>
+        <span class="entry-meta">2025 — 2026</span>
+      </div>
+      <div class="entry-sub">Rifflix · Remote</div>
+      <ul>
+        <li>Built runtime animation state machines and blend tree systems for real-time character control.</li>
+        <li>Developed animation tools and pipelines for automated episode generation.</li>
+        <li>Integrated procedural animation pipelines with AI-driven narrative systems.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Specialist Instructor</span>
+        <span class="entry-meta">2024 — Present</span>
+      </div>
+      <div class="entry-sub">India Game Lab · India</div>
+      <ul>
+        <li>Instructed character animation principles in Blender, Cascadeur & Unreal Engine.</li>
+        <li>Mentored students on motion design and animation workflows.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Baoli — store.steampowered.com/app/3347710/Baoli</span>
+        <span class="entry-meta">2025</span>
+      </div>
+      <div class="entry-sub">Lead Animation Director</div>
+      <ul>
+        <li>Directed all character and cinematic animation for a shipped Steam title.</li>
+        <li>Created AAA-quality character performances and environmental animations.</li>
+        <li>Stack: Unreal Engine, C++, Blender.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Procedural Locomotion</span>
+        <span class="entry-meta">2025</span>
+      </div>
+      <div class="entry-sub">Animation Programmer</div>
+      <ul>
+        <li>Built a procedural animation system generating natural walk and run cycles from parametric inputs.</li>
+        <li>Maths-driven joint movement for human-like locomotion.</li>
+        <li>Stack: Unreal Engine, C++, Python.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Motion Matching Systems</span>
+        <span class="entry-meta">2024</span>
+      </div>
+      <div class="entry-sub">Technical Animator</div>
+      <ul>
+        <li>Built reusable motion matching pipelines adaptable to diverse character types and movement styles.</li>
+        <li>Stack: MotionBuilder, Cascadeur, Blender.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-row"><span class="skill-label">Animation</span><span class="skill-items">Character Animation, Walk Cycles, Cinematic Sequences, Motion Capture Cleanup</span></div>
+      <div class="skill-row"><span class="skill-label">Software</span><span class="skill-items">Cascadeur, MotionBuilder, Blender, Maya</span></div>
+      <div class="skill-row"><span class="skill-label">Engines</span><span class="skill-items">Unreal Engine, Unity</span></div>
+      <div class="skill-row"><span class="skill-label">Other</span><span class="skill-items">Animation Directing, Team Leadership, Production Pipelines</span></div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Professional Certificate — Unreal Engine Generalist</span>
+        <span class="entry-meta">2022 — 2024</span>
+      </div>
+      <div class="entry-sub">India Game Lab</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

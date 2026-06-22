@@ -1,20 +1,35 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Bebas_Neue, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bebas = Bebas_Neue({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: "400",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "700",
+  style: ["italic"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Parth Sarthi - Animation Programmer & Technical Animator",
-  description: "Professional portfolio of an animation programmer and technical animator based in India.",
+  title: "Parth Sarthi — Animation Programmer & Technical Animator",
+  description: "Portfolio of Parth Sarthi — animation programmer building real-time character systems, procedural rigs, and playful interactive tools.",
 };
 
 export default function RootLayout({
@@ -25,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${bebas.variable} ${playfair.variable} ${jetbrains.variable} antialiased`}
       >
         {children}
       </body>
