@@ -272,7 +272,8 @@ export default function Home() {
                 See projects →
               </a>
               <a
-                href="#contact"
+                href={`${basePath}/CV.html`}
+                download="Parth_Sarthi_CV.html"
                 className="inline-flex items-center gap-2 px-5 py-2.5 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-card transition-colors"
               >
                 Download CV
