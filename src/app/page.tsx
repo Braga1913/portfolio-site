@@ -296,11 +296,6 @@ export default function Home() {
 
         {/* Decorative stickers */}
         <Sticker src={`${basePath}/mascot/sticker-star.png`} alt="" className="absolute top-32 left-6 hidden md:block" rotate={-12} size={64} />
-        <div className="absolute bottom-[8.5rem] right-[3.8rem] hidden lg:block rotate-12 z-10">
-          <div className="bg-sakura text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full font-mono tracking-wider shadow-md">
-            HI!
-          </div>
-        </div>
         <Sticker src={`${basePath}/mascot/mascot-pink.png`} alt="" className="absolute bottom-32 right-16 hidden lg:block animate-wiggle" rotate={8} size={56} />
         <Sticker src={`${basePath}/mascot/mascot-mint.png`} alt="" className="absolute bottom-20 left-[15%] hidden lg:block animate-float-slow" rotate={-6} size={48} />
 
