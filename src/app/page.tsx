@@ -196,7 +196,7 @@ const EDUCATION = [
 
 const SKILLS = [
   { group: "Languages", items: ["C++", "C#", "Python", "Blueprint", "HLSL"] },
-  { group: "Engines", items: ["Unreal Engine", "Unity", "Cascadeur", "MotionBuilder"] },
+  { group: "Engines", items: ["Unreal Engine", "Unity", "Flax Engine", "Rygnome (WIP)"] },
   { group: "DCC Tools", items: ["Blender", "Maya", "ZBrush", "Houdini"] },
   { group: "Domains", items: ["Procedural Animation", "Motion Matching", "Runtime Rigs", "Tool Development"] },
 ];
@@ -251,8 +251,20 @@ export default function Home() {
 
       {/* ─── Hero ────────────────────────────────────────────────────────── */}
 
-      <header id="top" className="relative min-h-[80vh] flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16">
-        <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 items-center">
+      <header id="top" className="relative min-h-[80vh] flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16 overflow-hidden">
+        {/* Background mascot */}
+        <Squishable className="absolute inset-0 flex items-start justify-end pointer-events-auto pt-0 pr-[2%]">
+          <img
+            src={`${basePath}/mascot/mascot-strings.png`}
+            alt=""
+            width={800}
+            height={800}
+            className="w-[69vw] max-w-[48rem] rotate-6 object-contain translate-y-4"
+            style={{ filter: 'drop-shadow(6px 10px 0 rgba(45, 36, 36, 0.10)) drop-shadow(12px 20px 12px rgba(45, 36, 36, 0.08))' }}
+          />
+        </Squishable>
+
+        <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 items-center relative z-10">
           <div className="lg:col-span-8 relative">
             <span className="font-mono text-xs tracking-[0.3em] opacity-60">
               ANIMATION PROGRAMMER &nbsp;·&nbsp; TECHNICAL ANIMATOR
@@ -280,26 +292,15 @@ export default function Home() {
               </a>
             </div>
           </div>
-
-          {/* Mascot */}
-          <div className="lg:col-span-4 relative flex justify-center">
-            <Squishable className="relative animate-float">
-              <img
-                src={`${basePath}/mascot/mascot-hero.png`}
-                alt="Parth's mascot"
-                width={240}
-                height={240}
-                className="w-52 h-52 lg:w-60 lg:h-60 sticker-shadow rotate-6"
-              />
-              <div className="absolute -top-3 -right-1 bg-sakura text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full font-mono tracking-wider shadow-md rotate-12">
-                HI!
-              </div>
-            </Squishable>
-          </div>
         </div>
 
         {/* Decorative stickers */}
         <Sticker src={`${basePath}/mascot/sticker-star.png`} alt="" className="absolute top-32 left-6 hidden md:block" rotate={-12} size={64} />
+        <div className="absolute bottom-[8.5rem] right-[3.8rem] hidden lg:block rotate-12 z-10">
+          <div className="bg-sakura text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full font-mono tracking-wider shadow-md">
+            HI!
+          </div>
+        </div>
         <Sticker src={`${basePath}/mascot/mascot-pink.png`} alt="" className="absolute bottom-32 right-16 hidden lg:block animate-wiggle" rotate={8} size={56} />
         <Sticker src={`${basePath}/mascot/mascot-mint.png`} alt="" className="absolute bottom-20 left-[15%] hidden lg:block animate-float-slow" rotate={-6} size={48} />
 
@@ -454,7 +455,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <Reveal>
             <span className="font-mono text-xs tracking-widest opacity-60">ANIMATIONS</span>
-            <h2 className="font-display text-3xl lg:text-4xl mt-2 mb-8">Hover to play</h2>
+            <h2 className="font-display text-3xl lg:text-4xl mt-2 mb-8">Click to play</h2>
           </Reveal>
           <div className="flex gap-6 items-start justify-start flex-wrap lg:flex-nowrap">
             {ANIMATIONS.map((a, i) => (
@@ -568,7 +569,7 @@ export default function Home() {
               key={i}
               className="text-background font-mono text-xs font-bold tracking-widest px-8 uppercase shrink-0"
             >
-              OPEN TO NEW ROLES ✦ ANIMATION PROGRAMMER ✦ TECHNICAL ARTIST ✦ TOOLS &amp; PIPELINE ✦
+              OPEN TO NEW ROLES ✦ ANIMATOR ✦ RIGGING ARTIST ✦ TECHNICAL ARTIST ✦ TOOLS &amp; PIPELINE ✦
             </span>
           ))}
         </div>
