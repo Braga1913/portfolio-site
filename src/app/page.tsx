@@ -252,8 +252,8 @@ export default function Home() {
       {/* ─── Hero ────────────────────────────────────────────────────────── */}
 
       <header id="top" className="relative min-h-screen flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16 overflow-hidden">
-        {/* Background mascot — hidden on mobile, shown on lg+ */}
-        <div className="absolute inset-0 hidden lg:flex items-start justify-end pointer-events-none pt-0 pr-[2%]">
+        {/* Background mascot */}
+        <div className="absolute inset-0 flex items-start justify-end pointer-events-none pt-0 pr-[2%]">
           <img
             src={`${basePath}/mascot/mascot-strings.png`}
             alt=""
@@ -263,24 +263,13 @@ export default function Home() {
             style={{ filter: 'drop-shadow(6px 10px 0 rgba(45, 36, 36, 0.10)) drop-shadow(12px 20px 12px rgba(45, 36, 36, 0.08))' }}
           />
         </div>
-        {/* Mobile mascot — smaller, positioned bottom-right so it never overlaps text */}
-        <div className="absolute inset-0 lg:hidden flex items-end justify-end pointer-events-none pr-2 pb-20">
-          <img
-            src={`${basePath}/mascot/mascot-strings.png`}
-            alt=""
-            width={800}
-            height={800}
-            className="w-[55vw] max-w-[20rem] object-contain opacity-70"
-            style={{ filter: 'drop-shadow(6px 10px 0 rgba(45, 36, 36, 0.10)) drop-shadow(12px 20px 12px rgba(45, 36, 36, 0.08))' }}
-          />
-        </div>
 
         <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 items-center relative z-10">
           <div className="lg:col-span-8 relative">
             <span className="font-mono text-xs tracking-[0.3em] opacity-60">
               ANIMATION PROGRAMMER &nbsp;·&nbsp; TECHNICAL ANIMATOR
             </span>
-            <h1 className="font-display text-[clamp(2.5rem,9vw,7.5rem)] leading-[0.9] tracking-tight animate-pop mt-4">
+            <h1 className="font-display text-[clamp(3rem,9vw,7.5rem)] leading-[0.9] tracking-tight animate-pop mt-4">
               I speak <span className="text-sakura">fluent</span><br />
               <span className="font-serif italic normal-case text-[0.78em] tracking-tight">motion.</span>
             </h1>
