@@ -253,7 +253,7 @@ export default function Home() {
 
       <header id="top" className="relative min-h-[80vh] flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16 overflow-hidden">
         {/* Background mascot */}
-        <Squishable className="absolute inset-0 flex items-start justify-end pointer-events-auto pt-0 pr-[2%]">
+        <div className="absolute inset-0 flex items-start justify-end pointer-events-none pt-0 pr-[2%]">
           <img
             src={`${basePath}/mascot/mascot-strings.png`}
             alt=""
@@ -262,7 +262,7 @@ export default function Home() {
             className="w-[69vw] max-w-[48rem] rotate-6 object-contain translate-y-4"
             style={{ filter: 'drop-shadow(6px 10px 0 rgba(45, 36, 36, 0.10)) drop-shadow(12px 20px 12px rgba(45, 36, 36, 0.08))' }}
           />
-        </Squishable>
+        </div>
 
         <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 items-center relative z-10">
           <div className="lg:col-span-8 relative">
