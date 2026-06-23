@@ -251,7 +251,7 @@ export default function Home() {
 
       {/* ─── Hero ────────────────────────────────────────────────────────── */}
 
-      <header id="top" className="relative min-h-[80vh] flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16 overflow-hidden">
+      <header id="top" className="relative min-h-screen flex flex-col justify-center px-6 lg:px-10 pt-28 pb-16 overflow-hidden">
         {/* Background mascot */}
         <div className="absolute inset-0 flex items-start justify-end pointer-events-none pt-0 pr-[2%]">
           <img
@@ -300,9 +300,11 @@ export default function Home() {
         <Sticker src={`${basePath}/mascot/mascot-mint.png`} alt="" className="absolute bottom-20 left-[15%] hidden lg:block animate-float-slow" rotate={-6} size={48} />
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50" style={{ animation: 'scroll-bounce 2s ease-in-out infinite' }}>
           <span className="font-mono text-[9px] tracking-widest uppercase">scroll</span>
-          <div className="w-px h-6 bg-foreground/30 animate-pulse" />
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none" className="opacity-60">
+            <path d="M6 0V16M6 16L1 11M6 16L11 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'scroll-line 2s ease-in-out infinite' }} />
+          </svg>
         </div>
       </header>
 

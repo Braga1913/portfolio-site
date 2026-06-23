@@ -93,6 +93,14 @@ body {
   0%, 92%, 100% { transform: scaleY(1); }
   95%           { transform: scaleY(0.08); }
 }
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+@keyframes scroll-line {
+  0%, 100% { height: 1.5rem; opacity: 0.3; }
+  50% { height: 2.5rem; opacity: 0.6; }
+}
 
 .animate-float           { animation: float 5s ease-in-out infinite; }
 .animate-float-slow      { animation: float-slow 7s ease-in-out infinite; }
@@ -102,6 +110,7 @@ body {
 .animate-pop         { animation: entrance-pop 0.7s var(--ease-bounce) both; }
 .animate-marquee     { animation: marquee 28s linear infinite; }
 .animate-blink       { animation: blink 4s ease-in-out infinite; transform-origin: center; }
+.animate-scroll-bounce { animation: scroll-bounce 2s ease-in-out infinite; }
 
 .hover-squash {
   transition: transform 0.2s ease;
