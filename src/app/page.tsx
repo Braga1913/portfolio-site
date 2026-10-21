@@ -225,14 +225,23 @@ export default function Home() {
             <a href="#experience" className="hover:text-sakura transition-colors">Experience</a>
             <a href="#animations" className="hover:text-sakura transition-colors">Animations</a>
             <a href="#education" className="hover:text-sakura transition-colors">Education</a>
+            <a href={`${basePath}/blog/`} className="hover:text-sakura transition-colors">Blog</a>
             <a href="#contact" className="hover:text-sakura transition-colors">Contact</a>
           </div>
-          <a
-            href="#contact"
-            className="font-mono text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 bg-foreground text-background rounded-full hover:bg-sakura hover:text-foreground transition-colors"
-          >
-            Hire me
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href={`${basePath}/blog/`}
+              className="md:hidden font-mono text-[11px] tracking-widest uppercase hover:text-sakura transition-colors"
+            >
+              Blog
+            </a>
+            <a
+              href="#contact"
+              className="font-mono text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 bg-foreground text-background rounded-full hover:bg-sakura hover:text-foreground transition-colors"
+            >
+              Hire me
+            </a>
+          </div>
         </div>
       </nav>
 
