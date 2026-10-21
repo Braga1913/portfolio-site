@@ -96,7 +96,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 const PROJECTS = [
   {
     title: "Baoli",
-    role: "Lead Animation Director",
+    role: "Unreal Generalist",
     year: "2025",
     summary: "Arjun, a young man grappling with the mysterious disappearance of his brother and his own struggles with drug use, players must unravel the mystery behind his brother's disappearance, confront terrifying visions, and explore the ominous secrets of Baoli, an ancient stepwell with a dark past.",
     stack: ["Unreal Engine", "C++", "Blender"],
@@ -122,26 +122,6 @@ const PROJECTS = [
     accent: "bg-mint",
     gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXA0ZzI2Z2UxNDgzdnRvdGtlcW50a2NudzIwOHAwNjBxbnI1czJwZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qaZjqbBLOtPM8mjKyb/giphy.gif",
   },
-
-  {
-    title: "Modular Character Rigs",
-    role: "Tools Programmer",
-    year: "2024",
-    summary: "Automated rigging system that cut character setup time by 80%. Built modular rig components that snap together for rapid prototyping in Unreal Engine.",
-    stack: ["Unreal Engine", "C++", "Blueprint"],
-    accent: "bg-lavender",
-    gif: "https://d1iv7db44yhgxn.cloudfront.net/documentation/images/4cc043e6-bebf-4cc1-8947-eeaf8ed35efb/image_24.gif",
-  },
-
-  {
-    title: "Motion Matching Systems",
-    role: "Technical Animator",
-    year: "2024",
-    summary: "Various motion matching setups for different characters. Built reusable motion matching pipelines adaptable to diverse character types and movement styles.",
-    stack: ["MotionBuilder", "Cascadeur", "Blender"],
-    accent: "bg-mint",
-    gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmxmNHlobjVxd2l1bDBtbWZ4ZWl6enFwZ2l1OW1kNm55YWc3c3JoaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KEfcE2RUMzEEX97syC/giphy.gif",
-  },
 ];
 
 const EXPERIENCE = [
@@ -157,7 +137,7 @@ const EXPERIENCE = [
     ],
   },
   {
-    role: "Animation Director & AI Programmer",
+    role: "Game Developer",
     company: "Shader Labs",
     period: "2023 — 2025",
     location: "India",
@@ -202,25 +182,32 @@ const SKILLS = [
 ];
 
 const ANIMATIONS = [
-  { title: "Walk Cycle", gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmJ5dXFjY2xyc3draGx0N29tZ3RtbGM1eXR0eTd5cG5vdXBhMGJmcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5POKjGZK3nEgDDbKri/giphy.gif", rotate: -3 },
-  { title: "TV Smack", gif: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTRjNGthZTZvb253M3ZvcXlzeWcyNGNwdTlka2FuaWpteGs3NTZtZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HzL5ngJCFDWoMMtZ2S/giphy.gif", rotate: 2 },
-  { title: "Waking Up", gif: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2RmcGxoanY1M3RqZzY3ZGZjc29iNGRsOWt3emp5NGw5ZjFhNGs4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/V5YrXqn96hrqi6PPQS/giphy.gif", rotate: -1 },
-  { title: "Glasses", gif: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWN2a2lwcTFsNGhnOWw5eHczZTRjcmw2Z3FwNTJ0Z3lwNWt4YjN3cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/grJUJHKWMMfrRTSZgH/giphy.gif", rotate: 3 },
-  { title: "Lighter", gif: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXF0eDJjZzhjMzRsbmw0d2xoanAydXlrbzZndjZkbnl0Ym9ibjJqdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qLVmoR6q3NYhnJh4Qe/giphy.gif", rotate: -2 },
-  { title: "Sit Down", gif: "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3IyNDFqYm83MnR5OTJra2k4Mjlubm9qdTR0NHF0NHVvajkxaHdkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SH9uV4tjhmSYcVrFxv/giphy.gif", rotate: 1 },
+  { title: "Walk Cycle", gif: `${basePath}/animations/walk-cycle.gif`, rotate: -3 },
+  { title: "TV Smack", gif: `${basePath}/animations/tv-smack.gif`, rotate: 2 },
+  { title: "Waking Up", gif: `${basePath}/animations/waking-up.gif`, rotate: -1 },
+  { title: "Glasses", gif: `${basePath}/animations/glasses.gif`, rotate: 3 },
+  { title: "Lighter", gif: `${basePath}/animations/lighter.gif`, rotate: -2 },
+  { title: "Sit Down", gif: `${basePath}/animations/sit-down.gif`, rotate: 1 },
 ];
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
   const [activeAnim, setActiveAnim] = useState<number | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
+    if (activeAnim === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveAnim(null);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [activeAnim]);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -279,16 +266,17 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover-squash"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-sakura hover:text-foreground transition-colors"
               >
                 See projects →
               </a>
               <a
-                href={`${basePath}/CV.html`}
-                download="Parth_Sarthi_CV.html"
+                href="https://github.com/Braga1913"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-card transition-colors"
               >
-                Download CV
+                GitHub
               </a>
             </div>
           </div>
@@ -332,9 +320,9 @@ export default function Home() {
             </p>
             <div className="grid grid-cols-3 gap-4 pt-4">
                 {[
-                  { k: "4+", v: "Years shipping" },
-                  { k: "3", v: "Projects shipped" },
-                  { k: "5", v: "Roles held" },
+                  { k: "2+", v: "Years in engine" },
+                  { k: "1", v: "Shipped title" },
+                  { k: "3", v: "Studios" },
                 ].map((s) => (
                 <div key={s.v} className="p-4 bg-card rounded-2xl border border-foreground/5">
                   <div className="font-display text-3xl text-sakura">{s.k}</div>
@@ -363,7 +351,7 @@ export default function Home() {
           <div className="space-y-10">
             {PROJECTS.map((p, i) => (
               <Reveal key={i} delay={(i % 3) + 1}>
-                <article className={`group grid md:grid-cols-12 gap-6 p-6 bg-card rounded-3xl border border-foreground/5 hover:-translate-y-1 hover:shadow-2xl transition-all duration-500 ${p.link ? 'cursor-pointer' : ''}`} onClick={p.link ? () => window.open(p.link, '_blank') : undefined}>
+                <article className="group grid md:grid-cols-12 gap-6 p-6 bg-card rounded-3xl border border-foreground/5 hover:-translate-y-1 hover:shadow-2xl transition-all duration-500">
                   <div className="md:col-span-5 relative overflow-hidden rounded-2xl aspect-[4/3]">
                     <div className={`absolute inset-0 ${p.accent} opacity-20`} />
                     <img
@@ -486,6 +474,9 @@ export default function Home() {
         <div
           className="fixed inset-0 z-[200] bg-black/70 backdrop-blur-sm flex items-center justify-center cursor-pointer"
           onClick={() => setActiveAnim(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={ANIMATIONS[activeAnim].title}
         >
           <div
             className="relative w-[80vw] max-w-2xl aspect-video rounded-2xl overflow-hidden border-2 border-white/10"
@@ -595,7 +586,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-3">
-            <a href="mailto:contact@parthsarthi.dev" className="px-6 py-3 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover-squash">
+            <a href="mailto:contact@parthsarthi.dev" className="px-6 py-3 bg-foreground text-background rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-sakura hover:text-foreground transition-colors">
               contact@parthsarthi.dev
             </a>
             <a href="https://github.com/Braga1913" className="px-6 py-3 border border-foreground/20 rounded-full font-mono text-xs tracking-widest uppercase font-bold hover:bg-background transition-colors">
@@ -609,7 +600,7 @@ export default function Home() {
           <div className="mt-16 p-5 border border-dashed border-foreground/15 rounded-2xl flex flex-col sm:flex-row items-center gap-4 sm:gap-0 justify-between">
             <div className="text-left">
               <span className="font-mono text-[10px] opacity-50 tracking-widest">CURRENT STATUS</span>
-              <p className="font-bold mt-1">Available · Spring 2026</p>
+              <p className="font-bold mt-1">Open to work</p>
             </div>
             <div className="flex -space-x-2">
               <div className="size-9 rounded-full bg-sakura border-2 border-card" />
