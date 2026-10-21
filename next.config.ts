@@ -1,13 +1,14 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === 'production';
-const repoName = 'portfolio-site';
+// Empty when the site is served from a custom domain; set to "/portfolio-site"
+// to publish under the github.io project URL instead.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
-  basePath: isProd ? `/${repoName}` : '',
-  assetPrefix: isProd ? `/${repoName}` : '',
+  basePath,
+  assetPrefix: basePath,
   images: {
     unoptimized: true
   }

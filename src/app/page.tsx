@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 
-const basePath = process.env.NODE_ENV === 'production' ? '/portfolio-site' : '';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 // ─── Click-to-squash wrapper ────────────────────────────────────────────────
 

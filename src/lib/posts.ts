@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { marked } from "marked";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
-const basePath = process.env.NODE_ENV === "production" ? "/portfolio-site" : "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export type Post = {
   slug: string;
