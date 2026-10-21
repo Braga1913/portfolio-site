@@ -304,11 +304,11 @@ export default function Home() {
             <span className="font-mono text-xs tracking-widest opacity-60">01 — ABOUT</span>
             <h2 className="font-display text-4xl lg:text-5xl mt-2">Half engineer, half animator.</h2>
             <img
-              src={`${basePath}/images/profile.png`}
+              src={`${basePath}/images/profile.jpg`}
               alt="Parth Sarthi"
-              width={200}
-              height={200}
-              className="mt-6 w-40 h-40 rounded-2xl object-cover sticker-shadow"
+              width={192}
+              height={192}
+              className="mt-10 w-48 h-48 rounded-full object-cover sticker-shadow"
             />
           </Reveal>
           <Reveal className="lg:col-span-8 space-y-5 text-foreground/80 leading-relaxed" delay={1}>
